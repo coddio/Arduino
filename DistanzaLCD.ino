@@ -25,17 +25,25 @@ void setup()
 }
 void loop()
 {
+  //Reset dello schermo e del sensore
   lcd.clear();
   digitalWrite(triggerPin,LOW);
   delayMicroseconds(2);
+  
+  //Manda un impulso con il sensore
   digitalWrite(triggerPin,HIGH);
   delayMicroseconds(10);
   digitalWrite(triggerPin,LOW);
   duration=pulseIn(echoPin, HIGH);
+  
+  //Calcola la distanza
   distance=duration*0.034/2;
+  
+  //Manda l'output alla console e allo schermo
   Serial.println(distance);
   lcd.print("Distanza: ");
   lcd.setCursor(0,1);
+  //Se la distanza è > di 500 dà errore
   if (distance <=500)
   {
     digitalWrite(buzzPin,LOW);
@@ -46,5 +54,6 @@ void loop()
     digitalWrite(buzzPin,HIGH);
     lcd.print("errore");
   }
+  //Delay finale
   delay(100);  
 }
