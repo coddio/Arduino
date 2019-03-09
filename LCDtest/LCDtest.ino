@@ -5,8 +5,6 @@ int D4=5;
 int D5=4;
 int D6=3;
 int D7=2;
-int triggerPin=9;
-int echoPin=10;
 LiquidCrystal lcd(rs,e,D4,D5,D6,D7);
 void setup()
 {
