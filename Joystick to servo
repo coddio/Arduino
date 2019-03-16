@@ -1,0 +1,37 @@
+#include <Servo.h>
+//Dichiara pin per il joystick
+int pinSW=1;
+int pinX=0;
+int pinY=1;
+//Dichiara variabili del joystick
+int vX;
+int vY;
+int pinServo=9;//Dichiara pin del servo
+int posX; //Dichiara variabile di posizione del servo
+Servo servoX; //Inizializza il servo
+
+void setup() {
+pinMode(pinSW,INPUT); //Inizializza il pin dello switch del joystick(Non utilizzato)
+Serial.begin(9600);
+servoX.attach(pinServo);//Dichiara il pin di controllo del servo
+}
+
+void loop() {
+  //Imposta le variabili X,Y del joystick
+ vX = analogRead(pinX);
+ vY = analogRead(pinY);
+ //Printa i valori della variabili nella console
+ Serial.println("Posizione:");
+ Serial.print("X:");
+ Serial.print(vX);
+ Serial.print(" Y:");
+ Serial.print(vY);
+ if(vX>=510) //Considera solo un range limitato per la X del joystick
+ {
+  posX=map(vX,510,1023,0,180);//Converte i valori X in valori angolari del servo
+  servoX.write(posX); //muove il servo
+  delay(25);
+ }
+ 
+
+}
